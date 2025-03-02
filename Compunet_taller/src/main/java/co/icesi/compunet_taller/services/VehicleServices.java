@@ -13,6 +13,11 @@ public class VehicleServices {
     private VehicleRepository vehicleRepository;
     private DriverServices driverService;
 
+    public VehicleServices(VehicleRepository vehicleRepository, DriverServices driverService) {
+        this.vehicleRepository = vehicleRepository;
+        this.driverService = driverService;
+    }
+
     //Obtener todos lo vehiculos
     public List<Vehicle> getVehicles() {
         List<Vehicle> vehicles = vehicleRepository.getAllVehicles();
@@ -51,6 +56,20 @@ public class VehicleServices {
     }
 
     //Eliminar un Vehiculo especifico usando la placa
+    public void deleteVehicleByPlaca(String placa) {
+        if (placa == null || placa.isEmpty()) {
+            throw new IllegalArgumentException("La placa no puede ser nula o vacía.");
+        }
+
+        Vehicle vehicle = vehicleRepository.findVehicle(placa);
+        if (vehicle == null) {
+            throw new IllegalArgumentException("No existe un vehículo con la placa: " + placa);
+        }
+
+        vehicleRepository.delete(vehicle);
+        System.out.println("Se ha eliminado el vehículo con placa: " + placa);
+    }
+
 
 
 }

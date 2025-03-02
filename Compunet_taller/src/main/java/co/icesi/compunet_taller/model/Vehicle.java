@@ -1,18 +1,20 @@
 package co.icesi.compunet_taller.model;
 
 import java.util.Date;
+import java.io.Serializable;
 
-public class Vehicle {
+
+public class Vehicle implements Serializable {
 
     private String id;
     private String placa;
     private String cilindraje;
     private String tipo_combustible;
-    private int numero_motor;
+    private String numero_motor;
     private String marca;
-    private Date modelo;
+    private int modelo;
 
-    public Vehicle(String id, String placa, String cilindraje, String tipo_combustible, int numero_motor, String marca, Date modelo) {
+    public Vehicle(String id, String placa, String cilindraje, String tipo_combustible, String numero_motor, String marca, int modelo) {
         this.id = id;
         this.placa = placa;
         this.cilindraje = cilindraje;
@@ -55,11 +57,11 @@ public class Vehicle {
         this.tipo_combustible = tipo_combustible;
     }
 
-    public int getNumero_motor() {
+    public String getNumero_motor() {
         return numero_motor;
     }
 
-    public void setNumero_motor(int numero_motor) {
+    public void setNumero_motor(String numero_motor) {
         this.numero_motor = numero_motor;
     }
 
@@ -71,11 +73,12 @@ public class Vehicle {
         this.marca = marca;
     }
 
-    public Date getModelo() {
+    public int getModelo() {
         return modelo;
     }
 
-    public void setModelo(Date modelo) {
+    public void setModelo(int modelo) {
         this.modelo = modelo;
     }
+
 }
