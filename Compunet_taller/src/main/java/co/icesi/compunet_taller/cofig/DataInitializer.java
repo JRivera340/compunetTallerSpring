@@ -26,25 +26,25 @@ public class DataInitializer implements ServletContextListener {
 
         // 3. Crear los conductores
         Driver driver1 = new Driver();
-        driver1.setId("D001");
+        driver1.setId("01");
         driver1.setName("Juan Amor");
-        driver1.setCargo("Monitor");
+        driver1.setCargo("Profesor");
         driver1.setTipo_identifacion(1);
-        driver1.setNum_identificacion("11111111");
+        driver1.setNum_identificacion("114382811");
 
         Driver driver2 = new Driver();
-        driver2.setId("D002");
+        driver2.setId("02");
         driver2.setName("Joshua Rivera");
-        driver2.setCargo("Estudiante");
+        driver2.setCargo("Monitor");
         driver2.setTipo_identifacion(2);
-        driver2.setNum_identificacion("22222222");
+        driver2.setNum_identificacion("114629291");
 
         Driver driver3 = new Driver();
-        driver3.setId("D003");
+        driver3.setId("03");
         driver3.setName("Joseph Velez");
         driver3.setCargo("Estudiante");
         driver3.setTipo_identifacion(1);
-        driver3.setNum_identificacion("33333333");
+        driver3.setNum_identificacion("11202392");
 
         driverRepo.save(driver1);
         driverRepo.save(driver2);
