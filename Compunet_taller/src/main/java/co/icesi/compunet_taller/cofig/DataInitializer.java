@@ -62,17 +62,17 @@ public class DataInitializer implements ServletContextListener {
         Vehicle vehicle9 = new Vehicle("V009","IJK901","3000","Gasolina", "MOTORI123J78", "Mercedes", 2023);
 
         // 6. Asignar los vehículos a conductores
-        vehicleService.addVehicleToDriver(vehicle1, driver1.getNum_identificacion());
-        vehicleService.addVehicleToDriver(vehicle2, driver1.getNum_identificacion());
-        vehicleService.addVehicleToDriver(vehicle3, driver1.getNum_identificacion());
+        vehicleService.addVehicleToDriver(vehicle1, driver1.getId());
+        vehicleService.addVehicleToDriver(vehicle2, driver1.getId());
+        vehicleService.addVehicleToDriver(vehicle3, driver1.getId());
 
-        vehicleService.addVehicleToDriver(vehicle4, driver2.getNum_identificacion());
-        vehicleService.addVehicleToDriver(vehicle5, driver2.getNum_identificacion());
-        vehicleService.addVehicleToDriver(vehicle6, driver2.getNum_identificacion());
+        vehicleService.addVehicleToDriver(vehicle4, driver2.getId());
+        vehicleService.addVehicleToDriver(vehicle5, driver2.getId());
+        vehicleService.addVehicleToDriver(vehicle6, driver2.getId());
 
-        vehicleService.addVehicleToDriver(vehicle7, driver3.getNum_identificacion());
-        vehicleService.addVehicleToDriver(vehicle8, driver3.getNum_identificacion());
-        vehicleService.addVehicleToDriver(vehicle9, driver3.getNum_identificacion());
+        vehicleService.addVehicleToDriver(vehicle7, driver3.getId());
+        vehicleService.addVehicleToDriver(vehicle8, driver3.getId());
+        vehicleService.addVehicleToDriver(vehicle9, driver3.getId());
 
         sce.getServletContext().setAttribute("driverService", driverService);
         sce.getServletContext().setAttribute("vehicleService", vehicleService);
