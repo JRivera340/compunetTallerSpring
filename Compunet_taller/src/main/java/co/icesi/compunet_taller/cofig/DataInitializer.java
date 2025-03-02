@@ -29,30 +29,28 @@ public class DataInitializer implements ServletContextListener {
         driver1.setId("D001");
         driver1.setName("Juan Amor");
         driver1.setCargo("Monitor");
-        driver1.setTipo_identifacion(1);          // Supongamos 1 = Cédula
+        driver1.setTipo_identifacion(1);
         driver1.setNum_identificacion("11111111");
 
         Driver driver2 = new Driver();
         driver2.setId("D002");
         driver2.setName("Joshua Rivera");
         driver2.setCargo("Estudiante");
-        driver2.setTipo_identifacion(2);          // 2 = Pasaporte
+        driver2.setTipo_identifacion(2);
         driver2.setNum_identificacion("22222222");
 
         Driver driver3 = new Driver();
         driver3.setId("D003");
         driver3.setName("Joseph Velez");
         driver3.setCargo("Estudiante");
-        driver3.setTipo_identifacion(1);          // 1 = Cédula
+        driver3.setTipo_identifacion(1);
         driver3.setNum_identificacion("33333333");
 
-        // 4. Guardar los conductores en el repositorio
         driverRepo.save(driver1);
         driverRepo.save(driver2);
         driverRepo.save(driver3);
 
         // 5. Crear 9 vehículos con datos más "reales"
-        //    Id, Placa, Cilindraje, TipoCombustible, NumeroMotor(12 char), Marca, AñoModelo
         Vehicle vehicle1 = new Vehicle("V001","ABC123","1600","Gasolina", "MOTORA123B12", "Toyota", 2021);
         Vehicle vehicle2 = new Vehicle("V002","BCD234","2000","Gasolina", "MOTORB123C34", "Mazda", 2020);
         Vehicle vehicle3 = new Vehicle("V003","CDE345","1800","Gasolina", "MOTORC123D56", "Nissan", 2019);
@@ -64,32 +62,25 @@ public class DataInitializer implements ServletContextListener {
         Vehicle vehicle9 = new Vehicle("V009","IJK901","3000","Gasolina", "MOTORI123J78", "Mercedes", 2023);
 
         // 6. Asignar los vehículos a conductores
-        //    Supongamos que a driver1 le asignamos 3 vehículos
         vehicleService.addVehicleToDriver(vehicle1, driver1.getNum_identificacion());
         vehicleService.addVehicleToDriver(vehicle2, driver1.getNum_identificacion());
         vehicleService.addVehicleToDriver(vehicle3, driver1.getNum_identificacion());
 
-        //    A driver2 le asignamos 3 vehículos
         vehicleService.addVehicleToDriver(vehicle4, driver2.getNum_identificacion());
         vehicleService.addVehicleToDriver(vehicle5, driver2.getNum_identificacion());
         vehicleService.addVehicleToDriver(vehicle6, driver2.getNum_identificacion());
 
-        //    A driver3 le asignamos 3 vehículos
         vehicleService.addVehicleToDriver(vehicle7, driver3.getNum_identificacion());
         vehicleService.addVehicleToDriver(vehicle8, driver3.getNum_identificacion());
         vehicleService.addVehicleToDriver(vehicle9, driver3.getNum_identificacion());
 
-        // 7. (Opcional) Deja en el ServletContext los servicios si quieres accederlos
-        //    luego en tus Servlets:
         sce.getServletContext().setAttribute("driverService", driverService);
         sce.getServletContext().setAttribute("vehicleService", vehicleService);
 
-        // 8. Mensaje de confirmación en logs
         System.out.println("=== DataInitializer: Datos de ejemplo cargados exitosamente ===");
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        // No se requiere implementar nada para este caso
     }
 }
