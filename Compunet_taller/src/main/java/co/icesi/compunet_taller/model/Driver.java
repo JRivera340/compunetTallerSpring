@@ -17,10 +17,6 @@ public class Driver implements Serializable {
     private String num_identificacion;
     private List<Vehicle> vehicles = new ArrayList<>();
 
-    public String getId() {
-        return id;
-    }
-
     public List<Vehicle> getVehicles() {
         return vehicles;
     }
@@ -41,6 +37,10 @@ public class Driver implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {
