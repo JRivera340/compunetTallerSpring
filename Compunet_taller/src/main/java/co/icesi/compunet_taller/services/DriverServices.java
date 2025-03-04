@@ -3,15 +3,18 @@ package co.icesi.compunet_taller.services;
 import co.icesi.compunet_taller.model.Driver;
 import co.icesi.compunet_taller.model.Vehicle;
 import co.icesi.compunet_taller.repository.DriverRepository;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
-//Clase para implementar la logica
+@ApplicationScoped
 public class DriverServices {
+
+    @Inject
     private DriverRepository driverRepository;
 
-    public DriverServices(DriverRepository driverRepository) {
-        this.driverRepository = driverRepository;
+    public DriverServices() {
     }
 
     //Obtener todos los conductores

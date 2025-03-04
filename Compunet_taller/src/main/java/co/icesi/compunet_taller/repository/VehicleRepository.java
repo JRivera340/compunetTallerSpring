@@ -1,12 +1,13 @@
 package co.icesi.compunet_taller.repository;
 
 import co.icesi.compunet_taller.model.Vehicle;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;
 import java.util.ArrayList;
 
 
-//Clase que realiza la acción
+@ApplicationScoped
 public class VehicleRepository {
 
     private List<Vehicle> vehicles = new ArrayList<>();

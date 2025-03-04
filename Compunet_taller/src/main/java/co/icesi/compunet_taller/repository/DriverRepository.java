@@ -2,11 +2,12 @@ package co.icesi.compunet_taller.repository;
 
 
 import co.icesi.compunet_taller.model.Driver;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//Clase que realiza la acción
+@ApplicationScoped
 public class DriverRepository {
 
     private List<Driver> drivers = new ArrayList<>();

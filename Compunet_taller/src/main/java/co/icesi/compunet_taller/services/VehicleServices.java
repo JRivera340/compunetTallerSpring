@@ -3,19 +3,22 @@ package co.icesi.compunet_taller.services;
 import co.icesi.compunet_taller.model.Driver;
 import co.icesi.compunet_taller.model.Vehicle;
 import co.icesi.compunet_taller.repository.VehicleRepository;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//Clase para implementar la logica
+@ApplicationScoped
 public class VehicleServices {
 
+    @Inject
     private VehicleRepository vehicleRepository;
+
+    @Inject
     private DriverServices driverService;
 
-    public VehicleServices(VehicleRepository vehicleRepository, DriverServices driverService) {
-        this.vehicleRepository = vehicleRepository;
-        this.driverService = driverService;
+    public VehicleServices() {
     }
 
     //Obtener todos lo vehiculos
