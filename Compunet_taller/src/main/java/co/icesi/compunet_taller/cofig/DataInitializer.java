@@ -2,29 +2,25 @@ package co.icesi.compunet_taller.cofig;
 
 import co.icesi.compunet_taller.model.Driver;
 import co.icesi.compunet_taller.model.Vehicle;
-import co.icesi.compunet_taller.repository.DriverRepository;
-import co.icesi.compunet_taller.repository.VehicleRepository;
 import co.icesi.compunet_taller.services.DriverServices;
 import co.icesi.compunet_taller.services.VehicleServices;
-
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
+import jakarta.inject.Inject;
 
 @WebListener
 public class DataInitializer implements ServletContextListener {
 
+    @Inject
+    private DriverServices driverService;
+
+    @Inject
+    private VehicleServices vehicleService;
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        // 1. Crear repositorios en memoria
-        DriverRepository driverRepo = new DriverRepository();
-        VehicleRepository vehicleRepo = new VehicleRepository();
-
-        // 2. Crear servicios
-        DriverServices driverService = new DriverServices(driverRepo);
-        VehicleServices vehicleService = new VehicleServices(vehicleRepo, driverService);
-
-        // 3. Crear los conductores
+        // Crear conductores
         Driver driver1 = new Driver();
         driver1.setId("01");
         driver1.setName("Juan Amor");
@@ -46,11 +42,11 @@ public class DataInitializer implements ServletContextListener {
         driver3.setTipo_identifacion(1);
         driver3.setNum_identificacion("11202392");
 
-        driverRepo.save(driver1);
-        driverRepo.save(driver2);
-        driverRepo.save(driver3);
+        driverService.createDriver(driver1);
+        driverService.createDriver(driver2);
+        driverService.createDriver(driver3);
 
-        // 5. Crear 9 vehículos con datos más "reales"
+        // Crear 9 vehículos con datos reales
         Vehicle vehicle1 = new Vehicle("V001","ABC123","1600","Gasolina", "MOTORA123B12", "Toyota", 2021);
         Vehicle vehicle2 = new Vehicle("V002","BCD234","2000","Gasolina", "MOTORB123C34", "Mazda", 2020);
         Vehicle vehicle3 = new Vehicle("V003","CDE345","1800","Gasolina", "MOTORC123D56", "Nissan", 2019);
@@ -61,7 +57,7 @@ public class DataInitializer implements ServletContextListener {
         Vehicle vehicle8 = new Vehicle("V008","HIJ890","2200","Gasolina", "MOTORH123I56", "BMW", 2021);
         Vehicle vehicle9 = new Vehicle("V009","IJK901","3000","Gasolina", "MOTORI123J78", "Mercedes", 2023);
 
-        // 6. Asignar los vehículos a conductores
+        // Asignar los vehículos a conductores
         vehicleService.addVehicleToDriver(vehicle1, driver1.getId());
         vehicleService.addVehicleToDriver(vehicle2, driver1.getId());
         vehicleService.addVehicleToDriver(vehicle3, driver1.getId());
@@ -73,9 +69,6 @@ public class DataInitializer implements ServletContextListener {
         vehicleService.addVehicleToDriver(vehicle7, driver3.getId());
         vehicleService.addVehicleToDriver(vehicle8, driver3.getId());
         vehicleService.addVehicleToDriver(vehicle9, driver3.getId());
-
-        sce.getServletContext().setAttribute("driverService", driverService);
-        sce.getServletContext().setAttribute("vehicleService", vehicleService);
 
         System.out.println("=== DataInitializer: Datos de ejemplo cargados exitosamente ===");
     }

@@ -1,6 +1,5 @@
 package co.icesi.compunet_taller.servlets;
 
-
 import co.icesi.compunet_taller.model.Vehicle;
 import co.icesi.compunet_taller.services.VehicleServices;
 import jakarta.servlet.ServletException;
@@ -8,10 +7,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.inject.Inject;
 import java.io.IOException;
 
 @WebServlet("/addVehicle")
 public class AddVehicleServlet extends HttpServlet {
+
+    @Inject
+    private VehicleServices vehicleService;
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -25,7 +29,6 @@ public class AddVehicleServlet extends HttpServlet {
         String conductorId = request.getParameter("conductorId");
 
         Vehicle vehicle = new Vehicle(id, placa, cilindraje, tipoCombustible, numeroMotor, marca, modelo);
-        VehicleServices vehicleService = (VehicleServices) getServletContext().getAttribute("vehicleService");
         try {
             vehicleService.addVehicleToDriver(vehicle, conductorId);
             request.setAttribute("message", "Vehículo agregado exitosamente al conductor con identificación " + conductorId);
