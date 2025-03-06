@@ -7,20 +7,26 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import java.io.IOException;
 
 @WebServlet("/searchDriverVehicles")
 public class SearchDriverVehiclesServlet extends HttpServlet {
 
-    @Inject
-    private DriverServices driverService;
+    @Autowired
+    private DriverServices driverServices;
+
+    @Override
+    public void init() throws ServletException {
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String numIdentificacion = request.getParameter("numIdentificacion");
-        Driver driver = driverService.findDriver(numIdentificacion);
+        Driver driver = driverServices.findDriver(numIdentificacion);
         request.setAttribute("driver", driver);
         request.getRequestDispatcher("searchDriverVehiclesResult.jsp").forward(request, response);
     }

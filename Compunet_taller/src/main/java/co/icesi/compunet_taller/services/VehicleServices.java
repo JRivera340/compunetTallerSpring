@@ -1,21 +1,19 @@
 package co.icesi.compunet_taller.services;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import co.icesi.compunet_taller.model.Vehicle;
 import co.icesi.compunet_taller.model.Driver;
 import co.icesi.compunet_taller.repository.VehicleRepository;
 import java.util.List;
 
-@ApplicationScoped
-@Named("vehicleServices")
+@Service
 public class VehicleServices {
 
-    @Inject
+    @Autowired
     private VehicleRepository vehicleRepository;
 
-    @Inject
+    @Autowired
     private DriverServices driverService;
 
     public List<Vehicle> getVehicles() {

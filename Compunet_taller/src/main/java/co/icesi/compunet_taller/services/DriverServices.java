@@ -1,18 +1,16 @@
 package co.icesi.compunet_taller.services;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import co.icesi.compunet_taller.model.Driver;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import co.icesi.compunet_taller.repository.DriverRepository;
+import co.icesi.compunet_taller.model.Driver;
 import co.icesi.compunet_taller.model.Vehicle;
 import java.util.List;
 
-@ApplicationScoped
-@Named("driverServices")
+@Service
 public class DriverServices {
 
-    @Inject
+    @Autowired
     private DriverRepository driverRepository;
 
     public List<Driver> findAllDrivers() {

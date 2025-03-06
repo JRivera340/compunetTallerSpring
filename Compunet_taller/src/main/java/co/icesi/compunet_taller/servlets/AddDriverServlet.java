@@ -1,20 +1,26 @@
 package co.icesi.compunet_taller.servlets;
 
 import co.icesi.compunet_taller.model.Driver;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 import co.icesi.compunet_taller.services.DriverServices;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.inject.Inject;
 import java.io.IOException;
 
 @WebServlet("/addDriver")
 public class AddDriverServlet extends HttpServlet {
 
-    @Inject
+    @Autowired
     private DriverServices driverService;
+
+    @Override
+    public void init() throws ServletException {
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

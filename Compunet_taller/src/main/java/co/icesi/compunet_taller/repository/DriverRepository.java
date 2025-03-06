@@ -1,13 +1,11 @@
 package co.icesi.compunet_taller.repository;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Named;
+import org.springframework.stereotype.Repository;
 import co.icesi.compunet_taller.model.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
-@ApplicationScoped
-@Named("driverRepository")
+@Repository
 public class DriverRepository {
 
     private List<Driver> drivers = new ArrayList<>();

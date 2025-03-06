@@ -1,13 +1,11 @@
 package co.icesi.compunet_taller.repository;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Named;
+import org.springframework.stereotype.Repository;
 import co.icesi.compunet_taller.model.Vehicle;
 import java.util.ArrayList;
 import java.util.List;
 
-@ApplicationScoped
-@Named("vehicleRepository")
+@Repository
 public class VehicleRepository {
 
     private List<Vehicle> vehicles = new ArrayList<>();

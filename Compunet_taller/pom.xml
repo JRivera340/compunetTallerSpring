@@ -8,88 +8,89 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.3</version>
-        <relativePath/>
-    </parent>
+    <!-- Se elimina el parent de Spring Boot -->
 
     <properties>
         <java.version>11</java.version>
+        <spring.version>5.3.27</spring.version>
+        <jetty.version>9.4.50.v20221201</jetty.version>
     </properties>
 
     <dependencies>
-        <!-- Spring Boot Web (excluimos Tomcat, usaremos Jetty) -->
+        <!-- Spring Context -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
         </dependency>
 
-        <!-- Spring Boot Starter Jetty para servidor embebido -->
+        <!-- Spring Web MVC -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jetty</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
         </dependency>
 
-        <!-- Dependencia para JSP en Jetty -->
+        <!-- JSTL para uso en JSP -->
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>apache-jsp</artifactId>
-            <version>11.0.15</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
         </dependency>
 
-        <!-- Spring Boot Data JPA (si lo usas) -->
+        <!-- API de Servlet (scope provided, ya que el contenedor lo proporciona) -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
+            <scope>provided</scope>
         </dependency>
 
-        <!-- Base de datos en memoria H2 (si la usas) -->
+        <!-- API de JSP (scope provided) -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- CDI (opcional, si usas @Inject, @ApplicationScoped, etc.) -->
-        <dependency>
-            <groupId>jakarta.enterprise</groupId>
-            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
             <version>3.0.0</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Dependencias para Jetty (en caso de que uses un servidor embebido para pruebas o despliegue) -->
         <dependency>
-            <groupId>jakarta.inject</groupId>
-            <artifactId>jakarta.inject-api</artifactId>
-            <version>2.0.1</version>
-            <scope>provided</scope>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jetty.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.jboss.weld.servlet</groupId>
-            <artifactId>weld-servlet-core</artifactId>
-            <version>4.0.1.Final</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>${jetty.version}</version>
         </dependency>
+
+        <!-- Si utilizas JPA, puedes incluir Spring Data JPA y Hibernate -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.7.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.6.15.Final</version>
+        </dependency>
+
+        <!-- Base de datos H2 (opcional, para pruebas o demo) -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.1.214</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Se eliminan dependencias de Spring Boot y CDI (Weld) ya que usaremos inyección con Spring -->
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Plugin de Spring Boot: reempaqueta el WAR para que sea ejecutable -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <!-- Marca el WAR como ejecutable, agregando el Main-Class en el MANIFEST -->
-                    <executable>true</executable>
-                </configuration>
-            </plugin>
-
             <!-- Plugin para generar el WAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
