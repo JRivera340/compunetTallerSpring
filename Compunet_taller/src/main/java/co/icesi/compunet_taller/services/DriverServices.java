@@ -1,23 +1,25 @@
 package co.icesi.compunet_taller.services;
 
+
 import co.icesi.compunet_taller.model.Driver;
 import co.icesi.compunet_taller.model.Vehicle;
 import co.icesi.compunet_taller.repository.DriverRepository;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@ApplicationScoped
+@Service
 public class DriverServices {
 
-    @Inject
+    @Autowired
     private DriverRepository driverRepository;
 
+    // Constructor por defecto (opcional)
     public DriverServices() {
     }
 
-    //Obtener todos los conductores
+    // Obtener todos los conductores
     public List<Driver> findAllDrivers() {
         List<Driver> conductores = driverRepository.getDrivers();
         if (conductores.isEmpty()) {
@@ -26,7 +28,7 @@ public class DriverServices {
         return conductores;
     }
 
-    //Crear un conductor
+    // Crear un conductor
     public void createDriver(Driver driver) {
         if (!driverRepository.exists(driver)) {
             driverRepository.save(driver);
@@ -35,7 +37,7 @@ public class DriverServices {
         }
     }
 
-    //Buscar un conductor por ID
+    // Buscar un conductor por ID
     public Driver findDriver(String numId) {
         if (numId == null) {
             throw new IllegalArgumentException("El número de identificación no puede ser nulo");
@@ -54,5 +56,4 @@ public class DriverServices {
         }
         return driver;
     }
-
 }

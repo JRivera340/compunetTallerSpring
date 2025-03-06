@@ -1,23 +1,24 @@
 package co.icesi.compunet_taller.repository;
 
+
+
 import co.icesi.compunet_taller.model.Vehicle;
-import jakarta.enterprise.context.ApplicationScoped;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-
-@ApplicationScoped
+@Repository
 public class VehicleRepository {
 
     private List<Vehicle> vehicles = new ArrayList<>();
 
-    //Obtener todos los vehiculos
+    // Obtener todos los vehículos
     public List<Vehicle> getAllVehicles() {
         return new ArrayList<>(vehicles);
     }
 
-    //obtener placa
+    // Obtener un vehículo por placa
     public Vehicle findVehicle(String placa) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getPlaca().equalsIgnoreCase(placa)) {
@@ -27,12 +28,12 @@ public class VehicleRepository {
         return null;
     }
 
-    //Agregar un vehiculo a un conductor
+    // Agregar un vehículo
     public void save(Vehicle vehicle) {
         vehicles.add(vehicle);
     }
 
-    //Eliminar un vehiculo especifico usando la placa
+    // Eliminar un vehículo usando la placa
     public void delete(Vehicle vehicle) {
         vehicles.remove(vehicle);
     }

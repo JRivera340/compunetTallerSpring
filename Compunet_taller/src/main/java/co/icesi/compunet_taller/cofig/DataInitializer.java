@@ -5,17 +5,17 @@ import co.icesi.compunet_taller.model.Driver;
 import co.icesi.compunet_taller.model.Vehicle;
 import co.icesi.compunet_taller.services.DriverServices;
 import co.icesi.compunet_taller.services.VehicleServices;
-import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@ApplicationScoped
+@Component
 public class DataInitializer {
 
-    @Inject
+    @Autowired
     private DriverServices driverService;
 
-    @Inject
+    @Autowired
     private VehicleServices vehicleService;
 
     @PostConstruct
@@ -42,7 +42,6 @@ public class DataInitializer {
         driver3.setTipo_identifacion(1);
         driver3.setNum_identificacion("11202392");
 
-        // Guardar conductores usando el servicio
         driverService.createDriver(driver1);
         driverService.createDriver(driver2);
         driverService.createDriver(driver3);
@@ -71,6 +70,6 @@ public class DataInitializer {
         vehicleService.addVehicleToDriver(vehicle8, driver3.getId());
         vehicleService.addVehicleToDriver(vehicle9, driver3.getId());
 
-        System.out.println("=== DataInitializerBean: Datos de ejemplo cargados exitosamente ===");
+        System.out.println("=== DataInitializer: Datos de ejemplo cargados exitosamente ===");
     }
 }
